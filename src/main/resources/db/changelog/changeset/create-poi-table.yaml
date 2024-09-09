@@ -1,0 +1,173 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-poi
+      author: ivantamrazov
+      changes:
+        - createTable:
+            tableName: poi
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: category
+                  type: varchar(255)
+              - column:
+                  name: subcategory
+                  type: varchar(255)
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: url
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: phone_number
+                  type: varchar(255)
+              - column:
+                  name: address
+                  type: varchar(255)
+              - column:
+                  name: longitude
+                  type: double
+              - column:
+                  name: latitude
+                  type: double
+              - column:
+                  name: opening_hours
+                  type: varchar(255)
+            remarks: 'Table for storing points of interest'
+
+  - changeSet:
+      id: insert-poi-data
+      author: ivantamrazov
+      changes:
+        - insert:
+            tableName: poi
+            columns:
+              - column:
+                  name: name
+                  value: 'Central Park'
+              - column:
+                  name: category
+                  value: 'Park'
+              - column:
+                  name: subcategory
+                  value: 'Urban'
+              - column:
+                  name: description
+                  value: 'A large public park in New York City.'
+              - column:
+                  name: url
+                  value: 'http://centralparknyc.org'
+              - column:
+                  name: email
+                  value: 'info@centralparknyc.org'
+              - column:
+                  name: phone_number
+                  value: '123-456-7890'
+              - column:
+                  name: address
+                  value: 'New York, NY 10024'
+              - column:
+                  name: longitude
+                  valueNumeric: -73.968285
+              - column:
+                  name: latitude
+                  valueNumeric: 40.785091
+              - column:
+                  name: opening_hours
+                  value: '6:00 AM - 1:00 AM'
+        - insert:
+            tableName: poi
+            columns:
+              - column:
+                  name: name
+                  value: 'Eiffel Tower'
+              - column:
+                  name: category
+                  value: 'Landmark'
+              - column:
+                  name: subcategory
+                  value: 'Historical'
+              - column:
+                  name: description
+                  value: 'A wrought-iron lattice tower in Paris, France.'
+              - column:
+                  name: url
+                  value: 'http://toureiffel.paris'
+              - column:
+                  name: email
+                  value: 'contact@toureiffel.paris'
+              - column:
+                  name: phone_number
+                  value: '+33 892 70 12 39'
+              - column:
+                  name: address
+                  value: 'Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France'
+              - column:
+                  name: longitude
+                  valueNumeric: 2.294481
+              - column:
+                  name: latitude
+                  valueNumeric: 48.858370
+              - column:
+                  name: opening_hours
+                  value: '9:30 AM - 11:45 PM'
+        - insert:
+            tableName: poi
+            columns:
+              - column:
+                  name: name
+                  value: 'The British Museum'
+              - column:
+                  name: category
+                  value: 'Museum'
+              - column:
+                  name: subcategory
+                  value: 'Art and History'
+              - column:
+                  name: description
+                  value: 'A public institution dedicated to human history, art, and culture in London.'
+              - column:
+                  name: url
+                  value: 'http://britishmuseum.org'
+              - column:
+                  name: email
+                  value: 'info@britishmuseum.org'
+              - column:
+                  name: phone_number
+                  value: '+44 20 7323 8299'
+              - column:
+                  name: address
+                  value: 'Great Russell St, Bloomsbury, London WC1B 3DG, United Kingdom'
+              - column:
+                  name: longitude
+                  valueNumeric: -0.126819
+              - column:
+                  name: latitude
+                  valueNumeric: 51.519413
+              - column:
+                  name: opening_hours
+                  value: '10:00 AM - 5:30 PM'
+  - changeSet:
+      id: 4-add-average-rating-to-poi-table
+      author: ivantamrazov
+      changes:
+        - addColumn:
+            tableName: poi
+            columns:
+              - column:
+                  name: average_rating
+                  type: DOUBLE
+                  constraints:
+                    nullable: true

@@ -1,0 +1,64 @@
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: 'true'
+  mail:
+    username: pasteyoursmtpgmailhere@gmail.com
+    port: '587'
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    host: smtp.gmail.com
+    password: pasteyourpasswordhere
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  main:
+    allow-bean-definition-overriding: 'true'
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: postgres
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/green_map
+  cache:
+    type: redis
+  data:
+    redis:
+      host: localhost
+      port: '6379'
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: 'true'
+  application:
+    name: green-map
+  liquibase:
+    enabled: 'true'
+springdoc:
+  swagger-ui:
+    enabled: 'true'
+    url: /api-docs
+  api-docs:
+    path: /api-docs
+  cache:
+    disabled: 'true'
+  show-actuator: 'true'
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            handler:
+              HandlerMappingIntrospector: TRACE
+        cache:
+          nodeValue: DEBUG
+          interceptor: DEBUG
+token:
+  signing:
+    key: useryoursigningkeyhere

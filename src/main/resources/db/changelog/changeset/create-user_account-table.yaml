@@ -1,0 +1,138 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user_account
+      author: ivantamrazov
+      changes:
+        - createTable:
+            tableName: user_account
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: username
+                  type: varchar(255)
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: year_of_birth
+                  type: int
+              - column:
+                  name: role
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+            remarks: 'Table for storing user accounts'
+
+  - changeSet:
+      id: insert-user_account-data
+      author: ivantamrazov
+      changes:
+        - insert:
+            tableName: user_account
+            columns:
+              - column:
+                  name: username
+                  value: 'user1'
+              - column:
+                  name: password
+                  value: 'password1'
+              - column:
+                  name: year_of_birth
+                  value: 1980
+              - column:
+                  name: role
+                  value: 'ADMIN'
+              - column:
+                  name: email
+                  value: 'user1@example.com'
+        - insert:
+            tableName: user_account
+            columns:
+              - column:
+                  name: username
+                  value: 'user2'
+              - column:
+                  name: password
+                  value: 'password2'
+              - column:
+                  name: year_of_birth
+                  value: 1990
+              - column:
+                  name: role
+                  value: 'USER'
+              - column:
+                  name: email
+                  value: 'user2@example.com'
+        - insert:
+            tableName: user_account
+            columns:
+              - column:
+                  name: username
+                  value: 'user3'
+              - column:
+                  name: password
+                  value: 'password3'
+              - column:
+                  name: year_of_birth
+                  value: 1985
+              - column:
+                  name: role
+                  value: 'USER'
+              - column:
+                  name: email
+                  value: 'user3@example.com'
+  - changeSet:
+      id: add-token-and-token_created_at
+      author: ivantamrazov
+      changes:
+        - addColumn:
+            tableName: user_account
+            columns:
+              - column:
+                  name: token
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: token_created_at
+                  type: timestamp
+                  constraints:
+                    nullable: true
+
+
+  - changeSet:
+      id: add-otp-and-active-columns
+      author: ivantamrazov
+      changes:
+        - addColumn:
+            tableName: user_account
+            columns:
+              - column:
+                  name: otp
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: active
+                  type: boolean
+                  constraints:
+                    nullable: true
+                    defaultValue: false
+
+  - changeSet:
+      id: update-active-column
+      author: ivantamrazov
+      changes:
+        - update:
+            tableName: user_account
+            columns:
+              - column:
+                  name: active
+                  value: true
+            where: "active IS NULL"

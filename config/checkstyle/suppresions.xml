@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+        "-//Puppy Crawl//DTD Suppression Filter 1.0//EN"
+        "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+<suppressions>
+    <!-- Suppress AvoidStarImport in files that end with 'Test.java' -->
+    <suppress files=".*Test\.java" checks="AvoidStarImport"/>
+</suppressions>

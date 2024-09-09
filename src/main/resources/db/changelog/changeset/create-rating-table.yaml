@@ -1,0 +1,81 @@
+databaseChangeLog:
+- changeSet:
+    id: create-rating-table
+    author: ivantamrazov
+    changes:
+      - createTable:
+          tableName: rating
+          columns:
+            - column:
+                name: id
+                type: BIGINT
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
+                name: user_id
+                type: BIGINT
+                constraints:
+                  nullable: false
+            - column:
+                name: poi_id
+                type: BIGINT
+                constraints:
+                  nullable: false
+            - column:
+                name: rating
+                type: INT
+                constraints:
+                  nullable: false
+            - column:
+                name: timestamp
+                type: TIMESTAMP
+                constraints:
+                  nullable: false
+
+      - addForeignKeyConstraint:
+          baseTableName: rating
+          baseColumnNames: user_id
+          constraintName: fk_rating_user_account
+          referencedTableName: user_account
+          referencedColumnNames: id
+
+      - addForeignKeyConstraint:
+          baseTableName: rating
+          baseColumnNames: poi_id
+          constraintName: fk_rating_poi
+          referencedTableName: poi
+          referencedColumnNames: id
+
+- changeSet:
+        id: add-cascade-delete-to-user-foreign-key
+        author: ivantamrazov
+        changes:
+          - dropForeignKeyConstraint:
+              baseTableName: rating
+              constraintName: fk_rating_user_account
+
+          - addForeignKeyConstraint:
+              baseTableName: rating
+              baseColumnNames: user_id
+              constraintName: fk_rating_user_account
+              referencedTableName: user_account
+              referencedColumnNames: id
+              onDelete: CASCADE
+
+- changeSet:
+        id: add-cascade-delete-to-poi-foreign-key
+        author: ivantamrazov
+        changes:
+          - dropForeignKeyConstraint:
+              baseTableName: rating
+              constraintName: fk_rating_poi
+
+          - addForeignKeyConstraint:
+              baseTableName: rating
+              baseColumnNames: poi_id
+              constraintName: fk_rating_poi
+              referencedTableName: poi
+              referencedColumnNames: id
+              onDelete: CASCADE
